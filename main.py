@@ -9,6 +9,7 @@ import logger_settings
 import get_md5 as getmd5
 import os
 import shutil
+import subprocess
 
 
 class OpenVpn:
@@ -32,8 +33,10 @@ class OpenVpn:
         """
         :type self: object
         """
-        r = requests.get(self.http_md5, auth=(self.user, self.password),
-                         cert=(os.path.join(os.getcwd(), self.ssl_crt), os.path.join(os.getcwd(), self.ssl_key)),
+
+        r = requests.get(self.http_md5, auth=(self.user, self.password), cert=(os.path.join(os.getcwd(), self.ssl_crt),
+                                                                               os.path.join(os.getcwd(),
+                                                                                            self.ssl_key)),
                          verify=False)
         logger_settings.logger.info(u'Response code {0:d}'.format(r.status_code))
         r.raise_for_status()
@@ -54,6 +57,9 @@ class OpenVpn:
             logger_settings.logger.info('Moving new config to openvpn directory')
             try:
                 shutil.copy(self.file_name_saved_local, os.path.join(os.getcwd(), self.openvpn_config_save_file))
+                logger_settings.logger.info('Restarting openvpn')
+                command = ['systemctl', 'restart', 'openvpn@client_danbordeanu.service']
+                subprocess.call(command, shell=False)
             except IOError, e:
                 logger_settings.logger.debug('Huston we have a big problem %s' % e)
 
