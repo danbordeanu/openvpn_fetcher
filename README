@@ -1,0 +1,4 @@
+--- openvpn_fetcher ---
+
+Fetch new openvpn server config from master server and restart service
+
