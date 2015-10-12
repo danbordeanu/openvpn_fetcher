@@ -33,7 +33,8 @@ class OpenVpn:
         :type self: object
         """
         r = requests.get(self.http_md5, auth=(self.user, self.password),
-                         cert=(os.path.join(os.getcwd(), self.ssl_crt), os.path.join(os.getcwd(), self.ssl_key)))
+                         cert=(os.path.join(os.getcwd(), self.ssl_crt), os.path.join(os.getcwd(), self.ssl_key)),
+                         verify=False)
         logger_settings.logger.info(u'Response code {0:d}'.format(r.status_code))
         r.raise_for_status()
         logger_settings.logger.info('Response md5 from server %s' % r.content.rstrip('\n'))
@@ -44,7 +45,8 @@ class OpenVpn:
             with open(self.file_name_saved_local, 'wb') as handle:
                 v = requests.get(self.openvpn_config_file, auth=(self.user, self.password),
                                  cert=(os.path.join(os.getcwd(), self.ssl_crt),
-                                       os.path.join(os.getcwd(), self.ssl_key)), stream=True)
+                                       os.path.join(os.getcwd(), self.ssl_key)), stream=True,
+                                 verify=False)
                 logger_settings.logger.info(u'Response code {0:d}'.format(v.status_code))
                 v.raise_for_status()
                 for block in v.iter_content(1024):
