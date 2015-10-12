@@ -7,8 +7,6 @@ import logger_settings
 
 def get_md5(blocksize=65536):
     """
-
-
     :param blocksize:
     :rtype : object
     """
