@@ -1,0 +1,20 @@
+client
+dev tun
+proto tcp
+comp-lzo
+remote danbordeanu.ro 5050 # replace with your access point's IP
+resolv-retry infinite
+user nobody
+group nobody
+nobind
+persist-key
+persist-tun
+mute-replay-warnings
+ca /etc/openvpn/certs_danbordeanu.ro/ca.crt
+cert /etc/openvpn/certs_danbordeanu.ro/client.crt
+key /etc/openvpn/certs_danbordeanu.ro/client.key
+tls-auth /etc/openvpn/certs_danbordeanu.ro/ta.key 1
+tls-client
+cipher DES-EDE3-CBC
+verb 3
+mute 20
