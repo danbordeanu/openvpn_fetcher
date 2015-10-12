@@ -10,6 +10,7 @@ import get_md5 as getmd5
 import os
 import shutil
 import subprocess
+import platform
 
 
 class OpenVpn:
@@ -58,7 +59,11 @@ class OpenVpn:
             try:
                 shutil.copy(self.file_name_saved_local, os.path.join(os.getcwd(), self.openvpn_config_save_file))
                 logger_settings.logger.info('Restarting openvpn')
-                command = ['systemctl', 'restart', 'openvpn@client_danbordeanu.service']
+                dist_name = platform.linux_distribution()[0]
+                if dist_name.upper() in ['DEBIAN', 'UBUNTU']:
+                    command = ['service', 'openvpn', 'restart']
+                else:
+                    command = ['systemctl', 'restart', 'openvpn@client_danbordeanu.service']
                 subprocess.call(command, shell=False)
             except IOError, e:
                 logger_settings.logger.debug('Huston we have a big problem %s' % e)
