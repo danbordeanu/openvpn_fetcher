@@ -4,9 +4,12 @@ import config_parser as parser
 import hashlib
 import logger_settings
 
+
 def get_md5(blocksize=65536):
     """
 
+
+    :param blocksize:
     :rtype : object
     """
     openvpn_config = parser.config_params('openvpnconfig')['file']
