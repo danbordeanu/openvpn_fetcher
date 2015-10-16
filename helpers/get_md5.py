@@ -1,8 +1,9 @@
+from helpers import logger_settings
+
 __author__ = 'danbordeanu'
 
 import config_parser as parser
 import hashlib
-import logger_settings
 
 
 def get_md5(blocksize=65536):

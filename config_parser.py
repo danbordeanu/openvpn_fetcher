@@ -1,7 +1,8 @@
+from helpers import logger_settings
+
 __author__ = 'danbordeanu'
 
 import ConfigParser
-import logger_settings
 import os
 import os.path
 import sys
