@@ -1,19 +1,15 @@
-__author__ = 'danbordeanu'
-
 #!/usr/bin/python
 
+__author__ = 'danbordeanu'
+
+import helpers
 import time
 import os
-
 import shutil
 import subprocess
 import platform
-
 import requests
-
 import config_parser as parser
-from helpers import get_md5 as getmd5, logger_settings
-
 
 class OpenVpn:
     def __init__(self, parser):
@@ -41,26 +37,26 @@ class OpenVpn:
                                                                                os.path.join(os.getcwd(),
                                                                                             self.ssl_key)),
                          verify=False)
-        logger_settings.logger.info(u'Response code {0:d}'.format(r.status_code))
+        helpers.logger_settings.logger.info(u'Response code {0:d}'.format(r.status_code))
         r.raise_for_status()
-        logger_settings.logger.info('Response md5 from server %s' % r.content.rstrip('\n'))
-        if r.content.rstrip('\n') == getmd5.get_md5():
-            logger_settings.logger.info('Same config, doing nothing...sleeping')
+        helpers.logger_settings.logger.info('Response md5 from server %s' % r.content.rstrip('\n'))
+        if r.content.rstrip('\n') == helpers.get_md5.get_md5():
+            helpers.logger_settings.logger.info('Same config, doing nothing...sleeping')
         else:
-            logger_settings.logger.info('New config detected, fun begins')
+            helpers.logger_settings.logger.info('New config detected, fun begins')
             with open(self.file_name_saved_local, 'wb') as handle:
                 v = requests.get(self.openvpn_config_file, auth=(self.user, self.password),
                                  cert=(os.path.join(os.getcwd(), self.ssl_crt),
                                        os.path.join(os.getcwd(), self.ssl_key)), stream=True,
                                  verify=False)
-                logger_settings.logger.info(u'Response code {0:d}'.format(v.status_code))
+                helpers.logger_settings.logger.info(u'Response code {0:d}'.format(v.status_code))
                 v.raise_for_status()
                 for block in v.iter_content(1024):
                     handle.write(block)
-            logger_settings.logger.info('Moving new config to openvpn directory')
+            helpers.logger_settings.logger.info('Moving new config to openvpn directory')
             try:
                 shutil.copy(self.file_name_saved_local, os.path.join(os.getcwd(), self.openvpn_config_save_file))
-                logger_settings.logger.info('Restarting openvpn')
+                helpers.logger_settings.logger.info('Restarting openvpn')
                 dist_name = platform.linux_distribution()[0]
                 if dist_name.upper() in ['DEBIAN', 'UBUNTU']:
                     command = ['service', 'openvpn', 'restart']
@@ -68,7 +64,7 @@ class OpenVpn:
                     command = ['systemctl', 'restart', 'openvpn@client_danbordeanu.service']
                 subprocess.call(command, shell=False)
             except IOError, e:
-                logger_settings.logger.debug('Huston we have a big problem %s' % e)
+                helpers.logger_settings.logger.debug('Huston we have a big problem %s' % e)
 
 
 def run_main():
@@ -79,4 +75,4 @@ def run_main():
 if __name__ == '__main__':
     start_time = time.time()
     run_main()
-    logger_settings.logger.info('It took me %s seconds to check for new config' % round((time.time() - start_time)))
+    helpers.logger_settings.logger.info('It took me %s seconds to check for new config' % round((time.time() - start_time)))
