@@ -1,5 +1,10 @@
 #!/usr/bin/python
 
+"""
+# (Cron version V5.0 -- $Id: crontab.c,v 1.12 2004/01/23 18:56:42 vixie Exp $)
+0 * * * * /home/users/dan/public_html/openvpn_updater
+"""
+
 __author__ = 'dan bordeanu'
 
 import os
