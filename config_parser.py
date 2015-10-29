@@ -1,4 +1,4 @@
-import logger_settings
+from helpers import logger_settings
 
 __author__ = 'danbordeanu'
 
