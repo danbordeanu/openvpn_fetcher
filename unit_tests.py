@@ -12,14 +12,14 @@ class Md5Test(unittest.TestCase):
         Test if md5 working
         :return:
         """
-        self.assertTrue(get_md5())
+        self.assertTrue(get_md5(), 'Uhh, md5 not working')
 
     def is_there_config_file(self):
         """
         Test if config file exists
         :return:
         """
-        self.assertTrue(check_if_config_exists())
+        self.assertTrue(check_if_config_exists(), 'Uhh, no config file')
 
 
 if __name__ == '__main__':
