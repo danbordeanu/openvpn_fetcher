@@ -6,7 +6,7 @@ import config_parser as parser
 import hashlib
 
 
-def get_md5(blocksize=65536):
+def get_md5():
     """
     :rtype : object
     """
