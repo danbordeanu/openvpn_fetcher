@@ -1,11 +1,12 @@
+from helpers import logger_settings
+
 __author__ = 'danbordeanu'
 
 import config_parser as parser
 import hashlib
-import logger_settings
 
 
-def get_md5(blocksize=65536):
+def get_md5():
     """
     :rtype : object
     """
@@ -19,3 +20,4 @@ def get_md5(blocksize=65536):
 
 config_md5 = get_md5()
 logger_settings.logger.info('md5 of local openvpn config is:%s' %config_md5)
+print 'git issues'

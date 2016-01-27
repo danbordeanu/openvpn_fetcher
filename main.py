@@ -1,16 +1,18 @@
-__author__ = 'danbordeanu'
-
 #!/usr/bin/python
 
-import config_parser as parser
-import requests
+__author__ = 'danbordeanu'
+
 import time
-import logger_settings
-import get_md5 as getmd5
 import os
 import shutil
 import subprocess
 import platform
+
+import requests
+
+import get_md5 as getmd5
+from helpers import logger_settings
+import config_parser as parser
 
 
 class OpenVpn:

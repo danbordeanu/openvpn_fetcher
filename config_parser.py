@@ -1,14 +1,14 @@
+from helpers import logger_settings
+
 __author__ = 'danbordeanu'
 
 import ConfigParser
-import logger_settings
 import os
 import os.path
 import sys
 
 
-def check_if_config_exists():
-    config_file = 'config.ini'
+def check_if_config_exists(config_file):
     if os.path.isfile(config_file) and os.access(config_file, os.R_OK):
         logger_settings.logging.info('ok we got config file')
     else:
@@ -31,6 +31,5 @@ def config_params(section):
             logger_settings.logging.info('exception on %s' % option)
     return dict_ini
 
-check_if_config_exists()
 
-
+check_if_config_exists('config.ini')
