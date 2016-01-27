@@ -20,4 +20,4 @@ def get_md5():
 
 config_md5 = get_md5()
 logger_settings.logger.info('md5 of local openvpn config is:%s' %config_md5)
-print 'git issues this is master'
+print 'git issues'
