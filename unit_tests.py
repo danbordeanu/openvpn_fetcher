@@ -5,6 +5,7 @@ import unittest
 from get_md5 import get_md5
 from config_parser import check_if_config_exists
 
+
 class Md5Test(unittest.TestCase):
     def test_is_there_md5(self):
         """
