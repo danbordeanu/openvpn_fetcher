@@ -4,7 +4,7 @@ __author__ = 'danbordeanu'
 
 import config_parser as parser
 import hashlib
-
+import time
 
 def get_md5(blocksize=65536):
     """
