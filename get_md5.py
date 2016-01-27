@@ -4,7 +4,7 @@ __author__ = 'danbordeanu'
 
 import config_parser as parser
 import hashlib
-import time
+
 
 def get_md5():
     """
@@ -20,4 +20,4 @@ def get_md5():
 
 config_md5 = get_md5()
 logger_settings.logger.info('md5 of local openvpn config is:%s' %config_md5)
-print 'git issues'
+print 'git issues this is master'
