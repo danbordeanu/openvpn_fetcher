@@ -18,7 +18,7 @@ def get_md5():
             md5.update(line)
         f.close()
         return md5.hexdigest()
-    except:
+    except IOError:
         logger_settings.logger.info('There is no config file...will download one for you')
         return md5.hexdigest()
 
