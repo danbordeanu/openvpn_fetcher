@@ -62,10 +62,14 @@ class OpenVpn:
                 shutil.copy(self.file_name_saved_local, os.path.join(os.getcwd(), self.openvpn_config_save_file))
                 logger_settings.logger.info('Restarting openvpn')
                 dist_name = platform.linux_distribution()[0]
+                mac_os = platform.system()
                 if dist_name.upper() in ['DEBIAN', 'UBUNTU']:
                     command = ['service', 'openvpn', 'restart']
                 else:
-                    command = ['systemctl', 'restart', 'openvpn@client_danbordeanu.service']
+                    if mac_os == 'Darwin':
+                        command = ['/usr/local/opt/openvpn/sbin/openvpn', '/etc/openvpn/client_danbordeanu']
+                    else:
+                        command = ['systemctl', 'restart', 'openvpn@client_danbordeanu.service']
                 subprocess.call(command, shell=False)
             except IOError, e:
                 logger_settings.logger.debug('Huston we have a big problem %s' % e)
