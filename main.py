@@ -48,13 +48,14 @@ class OpenVpn:
             logger_settings.logger.info('Same config, doing nothing...sleeping')
         else:
             logger_settings.logger.info('New config detected, fun begins')
+            v = requests.get(self.openvpn_config_file, auth=(self.user, self.password),
+                             cert=(os.path.join(os.getcwd(), self.ssl_crt),
+                                   os.path.join(os.getcwd(), self.ssl_key)), stream=True,
+                             verify=False)
+            logger_settings.logger.info(u'Response code {0:d}'.format(v.status_code))
+            v.raise_for_status()
+
             with open(self.file_name_saved_local, 'wb') as handle:
-                v = requests.get(self.openvpn_config_file, auth=(self.user, self.password),
-                                 cert=(os.path.join(os.getcwd(), self.ssl_crt),
-                                       os.path.join(os.getcwd(), self.ssl_key)), stream=True,
-                                 verify=False)
-                logger_settings.logger.info(u'Response code {0:d}'.format(v.status_code))
-                v.raise_for_status()
                 for block in v.iter_content(1024):
                     handle.write(block)
             logger_settings.logger.info('Moving new config to openvpn directory')
