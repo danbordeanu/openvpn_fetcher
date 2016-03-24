@@ -84,4 +84,4 @@ def run_main():
 if __name__ == '__main__':
     start_time = time.time()
     run_main()
-    logger_settings.logger.info('It took me %s seconds to check for new config' % round((time.time() - start_time)))
+    logger_settings.logger.info('It took me {0} seconds to check for new config'.format(round((time.time() - start_time))))
