@@ -43,7 +43,7 @@ class OpenVpn:
                          verify=False)
         logger_settings.logger.info(u'Response code {0:d}'.format(r.status_code))
         r.raise_for_status()
-        logger_settings.logger.info('Response md5 from server %s' % r.content.rstrip('\n'))
+        logger_settings.logger.info('Response md5 from server {0}'.format(r.content.rstrip('\n')))
         if r.content.rstrip('\n') == getmd5.get_md5():
             logger_settings.logger.info('Same config, doing nothing...sleeping')
         else:
@@ -73,7 +73,7 @@ class OpenVpn:
                         command = ['systemctl', 'restart', 'openvpn@client_danbordeanu.service']
                 subprocess.call(command, shell=False)
             except IOError, e:
-                logger_settings.logger.debug('Huston we have a big problem %s' % e)
+                logger_settings.logger.debug('Huston we have a big problem {0}'.format(e))
 
 
 def run_main():
