@@ -8,6 +8,7 @@ import os
 def check_if_config_exists(config_file):
     try:
         os.path.isfile(config_file)
+        logger_settings.logging.info('Everything is fine, there is {0}'.format(config_file))
     except IOError as e:
         logger_settings.logging.info('no file, no go {0}'.format(e))
 
