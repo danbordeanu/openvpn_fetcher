@@ -4,16 +4,12 @@ __author__ = 'danbordeanu'
 
 import ConfigParser
 import os
-import os.path
-import sys
-
 
 def check_if_config_exists(config_file):
-    if os.path.isfile(config_file) and os.access(config_file, os.R_OK):#TODO change this with try except
-        logger_settings.logging.info('ok we got config file')
-    else:
-        logger_settings.logging.info('no file, no go')
-        sys.exit(8)
+    try:
+        os.path.isfile(config_file)
+    except IOError as e:
+        logger_settings.logging.info('no file, no go {0}'.format(e))
 
 
 def config_params(section):
