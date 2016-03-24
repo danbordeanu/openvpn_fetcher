@@ -1,4 +1,14 @@
 --- openvpn_fetcher ---
 
-Fetch new openvpn server config from master server and restart service
+======================================================================
+Fetch new openvpn server config from web server and restart service
+======================================================================
 
+* Workflow:
+- Compare local md5 of openvpn config with remote md5 of stored openvpn config file.
+- If md5 are the same, do nothing.Else, download new openvpn configuration file.
+- Restart openvpn service.
+
+* prerequisite
+- python 2.7 with requests library
+- web server with md5 and openvpn configuration file (ssl and user/passwd auth)
