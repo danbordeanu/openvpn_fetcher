@@ -25,10 +25,10 @@ def config_params(section):
         try:
             dict_ini[option] = config.get(section, option)
             if dict_ini[option] == -1:
-                logger_settings.logging.info('skyp:%s' % option)
+                logger_settings.logging.info('skip:{0}'.format(option))
         except:
             assert isinstance(option, object)
-            logger_settings.logging.info('exception on %s' % option)
+            logger_settings.logging.info('exception on {0}'.format(option))
     return dict_ini
 
 
