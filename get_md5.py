@@ -23,4 +23,5 @@ def get_md5():
         return md5.hexdigest()
 
 config_md5 = get_md5()
-logger_settings.logger.info('md5 of local openvpn config is:%s' %config_md5) #TODO logger_settings.logger.info('md5 of local openvpn config is:{0}'.format(config_md5))
+logger_settings.logger.info('md5 of local openvpn config is:{0}'.format(config_md5))
+
