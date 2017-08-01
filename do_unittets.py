@@ -3,7 +3,7 @@ __author__ = 'danbordeanu'
 import unittest
 
 from get_md5 import get_md5
-from config_parser import check_if_config_exists
+from helpers.config_parser import check_if_config_exists
 
 
 class GetAllTest(unittest.TestCase):

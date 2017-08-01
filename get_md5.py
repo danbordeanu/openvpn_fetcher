@@ -2,7 +2,7 @@ from helpers import logger_settings
 
 __author__ = 'danbordeanu'
 
-import config_parser as parser
+import helpers.config_parser as parser
 import hashlib
 
 

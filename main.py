@@ -12,7 +12,7 @@ import requests
 
 import get_md5 as getmd5
 from helpers import logger_settings
-import config_parser as parser
+import helpers.config_parser as parser
 
 
 class OpenVpn:

@@ -3,7 +3,7 @@ __author__ = 'danbordeanu'
 import unittest
 
 from get_md5 import get_md5
-from config_parser import check_if_config_exists
+from helpers.config_parser import check_if_config_exists
 
 
 class Md5Test(unittest.TestCase):
@@ -19,7 +19,7 @@ class Md5Test(unittest.TestCase):
         Test if there is config file
         :return:
         """
-        self.assertTrue(check_if_config_exists('mimi'), 'Uhhh, no config file')
+        self.assertTrue(check_if_config_exists('config.ini'), 'Uhhh, no config file')
 
 if __name__ == '__main__':
     unittest.main()
